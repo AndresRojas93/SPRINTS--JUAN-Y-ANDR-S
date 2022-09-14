@@ -8,12 +8,18 @@ class Rol(models.Model):
     id_rol = models.IntegerField(primary_key=True)
     tipo = models.CharField(max_length=45)
 
+    def __str__(self):
+        return self.tipo
+
 class Administrador(models.Model):
     id_usuario= models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=45)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=45)
     rol = models.ForeignKey(Rol,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.nombre
 
 class Empresas(models.Model):
     id_empresas = models.IntegerField(primary_key=True)
@@ -24,6 +30,9 @@ class Empresas(models.Model):
     sector_produc = models.CharField(max_length=45)
     telefono = models.CharField(max_length=45)
     fecha_creacion = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.nombre
 
 
 class Empleado(models.Model):
@@ -36,6 +45,9 @@ class Empleado(models.Model):
     rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
     fecha_creacion = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.nombre+" "+ self.apellido
+
 class Reporte_contable(models.Model):
     id_estado = models.IntegerField(primary_key=True)
     estado = models.CharField(max_length=45)
@@ -44,6 +56,7 @@ class Reporte_contable(models.Model):
     empleado_empresas = models.ForeignKey(Empresas, on_delete=models.CASCADE)
     empleado_rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
     monto = models.IntegerField 
+
 
 class Usuario_app (models.Model):
     id_usuario = models.IntegerField(primary_key=True)
